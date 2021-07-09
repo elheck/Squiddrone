@@ -30,3 +30,30 @@ add_testpackage(TEST_NAME
                     ${CMAKE_SOURCE_DIR}/src/types
                     ${CMAKE_SOURCE_DIR}/tests/com/mock_libraries
 )
+
+add_testpackage(TEST_NAME 
+                    com_interrupt_handler
+                SOURCES
+                    com_interrupt_handler_tests.cpp
+                    ${CMAKE_SOURCE_DIR}/src/com/com_interrupt_handler.cpp
+                    ${CMAKE_SOURCE_DIR}/tests/com/mock_libraries/com_nrf24l01_mock.cpp
+                TEST_INCLUDE_DIRECTORIES
+                    ${CMAKE_SOURCE_DIR}/src/com
+                    ${CMAKE_SOURCE_DIR}/src/types
+                    ${CMAKE_SOURCE_DIR}/tests/com/mock_libraries
+                    ${CMAKE_SOURCE_DIR}/drivers
+                    ${CMAKE_SOURCE_DIR}/system
+                    ${CMAKE_SOURCE_DIR}/system/hal
+                    ${CMAKE_SOURCE_DIR}/system/cmsis
+)
+
+add_testpackage(TEST_NAME 
+                    com_nrf24l01
+                SOURCES
+                    com_nrf24l01_tests.cpp
+                    ${CMAKE_SOURCE_DIR}/src/com/com_nrf24l01.cpp
+                TEST_INCLUDE_DIRECTORIES
+                    ${CMAKE_SOURCE_DIR}/src/com
+                    ${CMAKE_SOURCE_DIR}/src/types
+                    ${CMAKE_SOURCE_DIR}/tests/com/mock_libraries
+)

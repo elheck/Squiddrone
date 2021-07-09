@@ -2,6 +2,7 @@
 #define SRC_SPI_SPI_HPP_
 
 #include <array>
+#include "mcu_settings.h"
 #include "spi_interface.hpp"
 #include "stm32g4xx_hal.h"
 

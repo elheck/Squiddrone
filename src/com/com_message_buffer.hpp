@@ -3,6 +3,7 @@
 
 #include <array>
 #include <queue>
+#include "com_buffer_types.hpp"
 #include "com_types.hpp"
 
 namespace com {
@@ -27,7 +28,7 @@ class ComMessageBuffer {
    * COM_BUFFER_IO_ERROR if com frame too large.
    * 
    */
-  auto PutData(types::com_msg_frame &data) noexcept -> types::ComError;
+  auto PutData(types::com_msg_frame &data) noexcept -> ComBufferError;
 
   /** 
    * @brief Retrieve data frame from queue buffer.

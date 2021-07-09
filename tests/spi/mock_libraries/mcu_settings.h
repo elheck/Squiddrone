@@ -1,0 +1,7 @@
+#ifndef SRC_MCU_CONFIG_MCU_SETTINGS_H_
+#define SRC_MCU_CONFIG_MCU_SETTINGS_H_
+
+#define CSCOM_Pin GPIO_PIN_8
+#define CSCOM_GPIO_Port GPIOA
+
+#endif

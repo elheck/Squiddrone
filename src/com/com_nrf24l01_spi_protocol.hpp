@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "com_nrf24l01_reg.hpp"
+#include "com_nrf24l01_types.hpp"
 #include "spi.hpp"
 #ifndef UNIT_TEST
 #include "utilities/byte.hpp"

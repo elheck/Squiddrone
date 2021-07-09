@@ -24,6 +24,16 @@ class Byte {
     byte_ = static_cast<std::uint8_t>(byte_ & ~SetBitInByte(0, bit_number_between_0_and_7));
   }
 
+  auto SetHighNibble(std::uint8_t value_between_0_and_15) noexcept -> void {
+    byte_ &= 0x0f;
+    byte_ |= static_cast<std::uint8_t>(value_between_0_and_15 << 4);
+  }
+
+  auto SetLowNibble(std::uint8_t value_between_0_and_15) noexcept -> void {
+    byte_ &= 0xf0;
+    byte_ |= (value_between_0_and_15);
+  }
+
   auto IsBitHigh(const std::uint8_t bit_number_between_0_and_7) noexcept -> bool {
     return static_cast<bool>(byte_ & 1 << bit_number_between_0_and_7);
   }

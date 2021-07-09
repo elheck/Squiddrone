@@ -7,6 +7,7 @@
 #include "com_message_buffer_mock.hpp"
 #endif
 #include "com_types.hpp"
+#include "error_types.hpp"
 
 #include <memory>
 
@@ -54,8 +55,8 @@ class ComInterface {
    * @return types::ComError COM_OK in case of successful transmission, error code in case something 
    * went wrong.
    */
-  virtual auto PutDataPacket(std::uint8_t target_id, types::com_msg_frame &payload) const noexcept
-      -> types::ComError = 0;
+  virtual auto PutDataPacket(std::uint8_t target_id, types::com_msg_frame &payload) noexcept
+      -> types::DriverStatus = 0;
 
  protected:
   /** 

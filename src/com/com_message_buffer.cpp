@@ -2,16 +2,16 @@
 #include "com_types.hpp"
 
 namespace com {
-auto ComMessageBuffer::PutData(types::com_msg_frame &data) noexcept -> types::ComError {
-  if (data_.size() > types::COM_BUFFER_MAX_QUEUE_LENGTH) {
-    return types::ComError::COM_BUFFER_OVERFLOW;
+auto ComMessageBuffer::PutData(types::com_msg_frame &data) noexcept -> ComBufferError {
+  if (data_.size() > COM_BUFFER_MAX_QUEUE_LENGTH) {
+    return ComBufferError::COM_BUFFER_OVERFLOW;
   }
   if (data.size() > types::COM_MAX_FRAME_LENGTH) {
-    return types::ComError::COM_BUFFER_IO_ERROR;
+    return ComBufferError::COM_BUFFER_IO_ERROR;
   }
 
   data_.push(data);
-  return types::ComError::COM_OK;
+  return ComBufferError::COM_BUFFER_OK;
 }
 
 auto ComMessageBuffer::GetData() noexcept -> types::com_msg_frame {

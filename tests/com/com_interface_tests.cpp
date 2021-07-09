@@ -15,12 +15,12 @@ class ConcreteComInterface final : public com::ComInterface {
   using com::ComInterface::msg_buffer_;
   explicit ConcreteComInterface(std::unique_ptr<com::ComMessageBuffer> com_buf) : com::ComInterface(std::move(com_buf)) {}
 
-  auto GetDataPacket() const noexcept -> types::com_msg_frame {
+  auto GetDataPacket() const noexcept -> types::com_msg_frame override {
     return msg_buffer_->GetData();
   }
 
-  auto PutDataPacket(std::uint8_t target_id, types::com_msg_frame &payload) const noexcept -> types::ComError {
-    return types::ComError::COM_OK;
+  auto PutDataPacket(std::uint8_t target_id, types::com_msg_frame &payload) noexcept -> types::DriverStatus override {
+    return types::DriverStatus::OK;
   }
 };
 
@@ -51,7 +51,7 @@ TEST_F(ComInterfaceTests, get_data_packet) {
 TEST_F(ComInterfaceTests, put_data_packet) {
   types::com_msg_frame data;
   auto unit_under_test = std::make_unique<ConcreteComInterface>(std::move(com_buffer_));
-  ASSERT_EQ(types::ComError::COM_OK, unit_under_test->PutDataPacket(1, data));
+  ASSERT_EQ(types::DriverStatus::OK, unit_under_test->PutDataPacket(1, data));
 }
 
 int main(int argc, char **argv) {

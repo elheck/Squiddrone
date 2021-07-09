@@ -16,23 +16,23 @@ class ComMessageBufferTests : public ::testing::Test {
 TEST_F(ComMessageBufferTests, put_data) {
   auto com_buffer = std::make_unique<com::ComMessageBuffer>();
   auto rv = com_buffer->PutData(ref_data);
-  ASSERT_EQ(rv, types::ComError::COM_OK);
+  ASSERT_EQ(rv, com::ComBufferError::COM_BUFFER_OK);
 }
 
 TEST_F(ComMessageBufferTests, put_data_buffer_overflow) {
   auto com_buffer = std::make_unique<com::ComMessageBuffer>();
-  for (int n = 0; n <= types::COM_BUFFER_MAX_QUEUE_LENGTH; n++) {
+  for (int n = 0; n <= com::COM_BUFFER_MAX_QUEUE_LENGTH; n++) {
     com_buffer->PutData(ref_data);
   }
   auto rv = com_buffer->PutData(ref_data);
-  ASSERT_EQ(rv, types::ComError::COM_BUFFER_OVERFLOW);
+  ASSERT_EQ(rv, com::ComBufferError::COM_BUFFER_OVERFLOW);
 }
 
 TEST_F(ComMessageBufferTests, put_data_max_frame_size_exceeded) {
   auto com_buffer = std::make_unique<com::ComMessageBuffer>();
   auto oversized_frame = types::com_msg_frame(types::COM_MAX_FRAME_LENGTH + 1);
   auto rv = com_buffer->PutData(oversized_frame);
-  ASSERT_EQ(rv, types::ComError::COM_BUFFER_IO_ERROR);
+  ASSERT_EQ(rv, com::ComBufferError::COM_BUFFER_IO_ERROR);
 }
 
 TEST_F(ComMessageBufferTests, get_data) {

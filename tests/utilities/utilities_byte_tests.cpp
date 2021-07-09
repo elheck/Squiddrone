@@ -122,6 +122,38 @@ TEST_F(UtilityByteTests, byte_is_bit_3_low_false) {
   EXPECT_EQ(true, unit_under_test->IsBitLow(3));
 }
 
+TEST_F(UtilityByteTests, byte_zero_set_low_nibble) {
+  unit_under_test = std::make_unique<utilities::Byte>(0);
+
+  unit_under_test->SetLowNibble(0b1010);
+
+  EXPECT_EQ(0b00001010, unit_under_test->Get());
+}
+
+TEST_F(UtilityByteTests, byte_zero_set_high_nibble) {
+  unit_under_test = std::make_unique<utilities::Byte>(0);
+
+  unit_under_test->SetHighNibble(0b1010);
+
+  EXPECT_EQ(0b10100000, unit_under_test->Get());
+}
+
+TEST_F(UtilityByteTests, byte_not_zero_set_low_nibble) {
+  unit_under_test = std::make_unique<utilities::Byte>(0b11111111);
+
+  unit_under_test->SetLowNibble(0b1010);
+
+  EXPECT_EQ(0b11111010, unit_under_test->Get());
+}
+
+TEST_F(UtilityByteTests, byte_not_zero_set_high_nibble) {
+  unit_under_test = std::make_unique<utilities::Byte>(0b11111111);
+
+  unit_under_test->SetHighNibble(0b1010);
+
+  EXPECT_EQ(0b10101111, unit_under_test->Get());
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
